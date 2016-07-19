@@ -46,6 +46,7 @@ def say_hello():
         <form action="/greet">
           <label>What's your name? <input type="text" name="person"></label>
           <br>
+          <br>
           Which compliment would you like?
             <select name="compliment">
               <option value="awesome">awesome</option>
@@ -64,10 +65,20 @@ def say_hello():
               <option value="lovely">lovely</option>
             </select>  
           <br>
+          <br>
           Are you having a good day?
            <input type="radio" name="daystatus" value="good">Good
            <input type="radio" name="daystatus" value="bad">Bad
+           <input type="radio" name="daystatus" value="meh">Meh          
            <input type="radio" name="daystatus" value="none-of-your-business">None of your business
+          <br>
+          <br>
+          What would you like to eat today?
+          <input type="checkbox" name="foodpreference" value="pasta">Pasta
+          <input type="checkbox" name="foodpreference" value="salad">Salad
+          <input type="checkbox" name="foodpreference" value="anything">Anything
+          <br>
+          <br>
           <input type="submit">
         </form>
       </body>
@@ -83,17 +94,32 @@ def greet_person():
 
     compliment = request.args.get("compliment")
 
+    daystatus = request.args.get("daystatus")
+
+    foodpreference = request.args.get("foodpreference")
+
     return """
     <!doctype html>
     <html>
       <head>
         <title>A Compliment</title>
+        
+        <style>
+          body {
+          background-color: red;
+          }
+
+        </style>
+      
       </head>
       <body>
         Hi %s I think you're %s!
+
+        You're having a %s kind of day and you'd like to eat %s.
+
       </body>
     </html>
-    """ % (player, compliment)
+    """ % (player, compliment, daystatus, foodpreference)
 
 
 if __name__ == '__main__':
